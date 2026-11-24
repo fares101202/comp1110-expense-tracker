@@ -104,3 +104,11 @@ def test_save_expenses(tmp_path, monkeypatch):
         project.save_expenses([], path)
     assert path.read_bytes() == previous
     assert list(tmp_path.glob(".expenses-*.tmp")) == []
+
+
+def test_total_spending():
+    """Add exact cents and handle an empty list without special cases."""
+    records = [{"amount_cents": cents} for cents in (450, 200, 300)]
+    assert project.total_spending(records) == 950
+    assert project.total_spending([]) == 0
+    assert project.total_spending([{"amount_cents": 1}]) == 1

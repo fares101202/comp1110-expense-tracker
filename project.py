@@ -121,5 +121,13 @@ def main():
     print(f"Valid expense input: {category} - ${dollars}.{remainder:02d}")
 
 
+def total_spending(expenses):
+    """Return total spending in whole cents, or zero for no expenses."""
+    total = 0
+    for expense in expenses:
+        total += expense["amount_cents"]
+    return total
+
+
 if __name__ == "__main__":
     main()
